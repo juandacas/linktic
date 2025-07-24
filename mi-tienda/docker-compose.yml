@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  postgres_productos:
+    image: postgres:16
+    container_name: postgres_productos_container
+    restart: always
+    environment:
+      POSTGRES_DB: productosdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - productos_data:/var/lib/postgresql/data
+    networks:
+      - mi_red
+
+  postgres_inventario:
+    image: postgres:16
+    container_name: postgres_inventario_container
+    restart: always
+    environment:
+      POSTGRES_DB: inventariodb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5434:5432"
+    volumes:
+      - inventario_data:/var/lib/postgresql/data
+    networks:
+      - mi_red
+
+  productos-service:
+    build:
+      context: ./productos-service
+    container_name: productos_service
+    depends_on:
+      - postgres_productos
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_productos:5432/productosdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    networks:
+      - mi_red
+
+  inventario-service:
+    build:
+      context: ./inventario-service
+    container_name: inventario_service
+    depends_on:
+      - postgres_inventario
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_inventario:5432/inventariodb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    networks:
+      - mi_red
+
+volumes:
+  productos_data:
+  inventario_data:
+
+networks:
+  mi_red:
