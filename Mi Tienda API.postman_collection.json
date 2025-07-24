@@ -1,0 +1,154 @@
+{
+	"info": {
+		"_postman_id": "b40d941c-ddcb-444f-a695-dceec146939a",
+		"name": "Mi Tienda API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12753881"
+	},
+	"item": [
+		{
+			"name": "Productos - Listar",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "clave-secreta",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/productos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"productos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Productos - Crear",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-api-key",
+						"value": "clave-secreta",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"Producto de prueba\",\n  \"descripcion\": \"Descripción ejemplo\",\n  \"precio\": 10000\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8081/productos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"productos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventario - Crear",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-api-key",
+						"value": "clave-secreta",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"productoId\": 1,\n  \"cantidad\": 50\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/inventario",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"inventario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventario - Registrar Compra",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-api-key",
+						"value": "clave-secreta",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"productoId\": 1,\n  \"cantidad\": 2\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/inventario/compras",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"inventario",
+						"compras"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventario-obtener",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Inventario-actualizar",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
